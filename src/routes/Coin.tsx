@@ -28,18 +28,22 @@ const Header = styled.header`
 const HomeLink = styled(Link)`
     width: 30px;
     height: 30px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 45%;
     left: 10%;
     transform: translateY(-45%);
-    font-size: 28px;
+    font-size: 22px;
     text-align: center;
-    background-color: white;
-    color: black;
+    background-color: ${props => props.theme.textColor};
+    color: ${props => props.theme.bgColor};
     border-radius: 50%;
-    line-height: 35px;
     text-decoration: none;
+    span {
+        padding-top: 5px;
+    }
 `;
 
 const Title = styled.h1`
@@ -143,7 +147,9 @@ function Coin () {
                 <title> {state?.name ? state.name : loading ? "Loading" : infoData?.name} </title>
             </Helmet>
             <Header>
-                <HomeLink to="/"> &larr; </HomeLink>
+                <HomeLink to="/"> 
+                    <span> ⬅️ </span> 
+                </HomeLink>
                 <Title> {state?.name ? state.name : loading ? "Loading" : infoData?.name} </Title>
                 <ChangeBtn />
             </Header>
