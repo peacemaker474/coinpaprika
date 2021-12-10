@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/coinpaprika/static/js/main.b9c4aeb8.chunk.js",
-    "main.js.map": "/coinpaprika/static/js/main.b9c4aeb8.chunk.js.map",
+    "main.js": "/coinpaprika/static/js/main.a0b5e28e.chunk.js",
+    "main.js.map": "/coinpaprika/static/js/main.a0b5e28e.chunk.js.map",
     "runtime-main.js": "/coinpaprika/static/js/runtime-main.a640105d.js",
     "runtime-main.js.map": "/coinpaprika/static/js/runtime-main.a640105d.js.map",
     "static/js/2.73686917.chunk.js": "/coinpaprika/static/js/2.73686917.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.a640105d.js",
     "static/js/2.73686917.chunk.js",
-    "static/js/main.b9c4aeb8.chunk.js"
+    "static/js/main.a0b5e28e.chunk.js"
   ]
 }
