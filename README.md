@@ -7,6 +7,8 @@
 
 [ ] Chart Section Add 2 Charts
 
+[ ] Dark, Light Mode
+
 [ ] Infinity Scroll
 
 [ ] More Function Add..

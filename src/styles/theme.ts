@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 export const darkTheme: DefaultTheme = {
     bgColor: "#2A272A",
     textColor: "#bffcf9",
-    accentColor: "#00C9C8",
+    accentColor: "#00e6e4",
     boxColor: "#000",
 }
 

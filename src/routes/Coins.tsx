@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import { fetchCoins } from '../api/api';
 import Loading from '../components/Loading';
+import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
+import ChangeBtn from '../components/ChangeBtn';
 
 const Container = styled.div`
     max-width: 480px;
@@ -15,6 +17,7 @@ const Header = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 `;
 
 const Title = styled.h1`
@@ -65,8 +68,12 @@ function Coins () {
 
     return (
         <Container>
+            <Helmet>
+                <title> 1405 Coin </title>
+            </Helmet>
             <Header>
                 <Title> 1405 Coin </Title>
+                <ChangeBtn />
             </Header>
             {isLoading ? (
                 <Loading />
