@@ -18,9 +18,10 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
+    width: 100%;
     height: 15vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
 `;
@@ -31,19 +32,12 @@ const HomeLink = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 45%;
-    left: 10%;
-    transform: translateY(-45%);
     font-size: 22px;
     text-align: center;
     background-color: ${props => props.theme.textColor};
     color: ${props => props.theme.bgColor};
     border-radius: 50%;
     text-decoration: none;
-    span {
-        padding-top: 5px;
-    }
 `;
 
 const Title = styled.h1`
@@ -148,7 +142,7 @@ function Coin () {
             </Helmet>
             <Header>
                 <HomeLink to="/"> 
-                    <span> ⬅️ </span> 
+                    <i className="fas fa-home"></i> 
                 </HomeLink>
                 <Title> {state?.name ? state.name : loading ? "Loading" : infoData?.name} </Title>
                 <ChangeBtn />

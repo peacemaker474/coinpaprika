@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 import { isDarkAtom } from "../atomos";
+import { useLocation } from "react-router";
 
 const Wrapper = styled.div`
     width: 100px;
@@ -16,8 +17,11 @@ const Wrapper = styled.div`
     padding: 0 5px;
     cursor: pointer;
     transition: all .3s;
-    position: absolute;
-    right: 2%;
+
+    &[data-position="true"] {
+        position: absolute;
+        right: 2%;
+    }
 
     .icon {
         color: #f88748;
@@ -65,9 +69,15 @@ const boxVariants = {
 
 function ChangeBtn () {
     const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+    const {pathname} = useLocation();
 
     return (
-        <Wrapper data-darkmode={isDark} onClick={() => setIsDark(!isDark)} style={{justifyContent: isDark ? 'flex-end' : 'flex-start'}}>
+        <Wrapper 
+            data-darkmode={isDark}
+            onClick={() => setIsDark(!isDark)}
+            style={{justifyContent: isDark ? 'flex-end' : 'flex-start'}}
+            data-position={pathname === "/" ? true : false}
+        >
             <Box layout>
                 <AnimatePresence exitBeforeEnter initial={false}>
                     <motion.i 

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from '../atomos';
 
 const Wrapper = styled(motion.div)`
     width: 100%;
@@ -28,16 +30,15 @@ const svgVariants = {
     start: {
         opacity: 0,
         pathLength: 0,
-        fill: "rgba(255, 255, 255, 0)",
     },
     end: {
         opacity: 1,
         pathLength: 1,
-        fill: "rgba(255, 255, 255, 1)",
     }
 }
 
 function Loading () {
+    const isDark = useRecoilValue(isDarkAtom);
     return (
         <Wrapper>
             <Svg 
@@ -47,6 +48,7 @@ function Loading () {
             >
                 <motion.path
                     variants={svgVariants}
+                    fill= {isDark ? "rgba(255, 255, 255, 1)" : "rgba(0, 0, 0, 1)"}
                     initial="start"
                     animate="end"
                     transition={{
@@ -55,7 +57,7 @@ function Loading () {
                             ease: "easeInOut"
                         },
                         fill: {
-                            duration: 2,
+                            duration: 3,
                             ease: [1, 0, 0.8, 1],
                         }
                     }}
