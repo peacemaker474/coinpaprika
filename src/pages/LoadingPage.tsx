@@ -4,6 +4,7 @@ import { isDarkAtom } from "../atoms/atom";
 
 const Wrapper = styled.div<{ isDark: boolean }>`
     width: 100%;
+    height: 100vh;
     color: ${({ theme, isDark }) => isDark ? theme.black.textColor : theme.white.textColor};
     text-align: center;
 `;

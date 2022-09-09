@@ -7,7 +7,7 @@ const ScrollBtn = styled.button<{ visible: boolean; }>`
     height: 50px;
     position: fixed;
     bottom: 5%;
-    right 35%;
+    right 25%;
     font-size: 3rem;
     z-index: 2;
     cursor: pointer;

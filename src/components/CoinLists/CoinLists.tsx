@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -5,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { isDarkAtom } from '../../atoms/atom';
 import { fetchGetCoinLists } from '../../network/api';
 import LoadingPage from '../../pages/LoadingPage';
+import useIntersectionObserver from '../../hooks/useInfinityScroll';
 
 const MainCoinLists = styled.ul<{ isDark: boolean }>`
     li {
@@ -61,9 +63,38 @@ interface CoinData {
 }
 
 function CoinLists() {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [itemIndex, setItemIndex] = useState(0);
+    const [showdata, setShowData] = useState<CoinData[]>() as any[];
     const isDark = useRecoilValue(isDarkAtom);
     const { data, isLoading, isFetching } = useQuery<CoinData[]>(["allCoins"], fetchGetCoinLists, {
-        select: (data) => data.slice(0, 30)
+        select: (data) => data.slice(0, 150),
+        onSuccess: (data) => setShowData(data?.slice(0, 15)),
+    });
+
+    const getMoreItem = async () => {
+        setIsLoaded(true);
+        setItemIndex((i) => i + 1);
+        setShowData(showdata?.concat(data?.slice(itemIndex * 15, (itemIndex + 1) * 15)));
+        setIsLoaded(false);
+    };
+
+    const onIntersect: IntersectionObserverCallback = async (
+        [entry],
+        observer
+    ) => {
+        if (entry.isIntersecting && !isLoaded) {
+            observer.unobserve(entry.target);
+            await getMoreItem();
+            observer.observe(entry.target);
+        }
+    };
+
+    const { setTarget } = useIntersectionObserver({
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+        onIntersect,
     })
 
     if (isLoading || isFetching) return <LoadingPage />
@@ -71,13 +102,14 @@ function CoinLists() {
     return (
         <MainCoinLists isDark={isDark}>
             {
-                data?.map((coin) => (
+                showdata?.map((coin: CoinData) => (
                     <CoinList key={coin.id}>
                         <CoinImage src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />
                         <CoinTitle to={`/${coin.id}`} state={{ name: coin.name }}> {coin.name} → </CoinTitle>
                     </CoinList>
                 ))
             }
+            <div ref={setTarget}> {isLoaded && <LoadingPage />} </div>
         </MainCoinLists>
     );
 }

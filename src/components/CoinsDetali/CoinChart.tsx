@@ -11,9 +11,11 @@ const Wrapper = styled.div`
     width: 100%;
 `;
 
-const ErrorMessage = styled.h2`
+const ErrorMessage = styled.h2<{ isDark: boolean; }>`
     text-align: center;
     font-size: 18px;
+    font-weight: bold;
+    color: ${({ theme, isDark }) => isDark ? theme.black.textColor : theme.white.textColor};
 `;
 
 interface ICoinID {
@@ -83,7 +85,7 @@ function CoinChart() {
         <Wrapper>
             {
                 Object.keys(data!).includes('error') ?
-                    <ErrorMessage> We don't have Coin Price Information</ErrorMessage> :
+                    <ErrorMessage isDark={isDark}> We don't have Coin Price Information</ErrorMessage> :
                     <ApexCharts
                         type="candlestick"
                         series={[{

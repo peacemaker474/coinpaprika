@@ -21,7 +21,7 @@ root.render(
   <React.StrictMode>
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <App />
